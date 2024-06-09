@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VanilCast</title>
+  </head>
+  <body>
+    <div class="cityCard">
+      <div class="update">
+        <span>update</span>
+        <img src="./src/imgs/update.png" alt="update icon" />
+      </div>
+
+      <div class="information">
+        <h3 class="cityName">city name</h3>
+
+        <div class="weather">
+          <img
+            src="./src/imgs/cloud.png"
+            class="condition-img"
+            alt="wx condition img"
+          />
+          <div class="degree">10&deg;C</div>
+        </div>
+      </div>
+
+      <div class="details">
+        <div class="icons">
+          <img src="./src/imgs/humidity_blue.png" alt="moist icon" />
+          <img src="./src/imgs/air_blue.png" alt="wind speed icon" />
+        </div>
+        <div class="detailsNumbers">
+          <span class="moist">10%</span>
+          <span class="windSpeed">10 Kph</span>
+        </div>
+      </div>
+    </div>
+
+    <form>
+      <input
+        type="text"
+        id="cityInput"
+        name="city"
+        placeholder="city name please"
+      />
+    </form>
+  </body>
+</html>
