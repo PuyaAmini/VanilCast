@@ -8,6 +8,9 @@ body {
   background-color: #edf0f6;
   color: #333;
 }
+/* .notDisplay{
+       display: none;
+} */
 .update {
   font-size: 0.9rem;
   position: absolute;
@@ -49,4 +52,10 @@ h3.cityName{
 }
 .detailsNumbers span.windSpeed{
        margin-right: -20px;
+}
+form{
+       position: fixed;
+       top:80%;
+       left:50%;
+       transform: translate(-50% , -50%);
 }

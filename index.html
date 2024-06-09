@@ -13,7 +13,7 @@
         <img src="./src/imgs/update.png" alt="update icon" />
       </div>
 
-      <div class="information">
+      <div class="information notDisplay">
         <h3 class="cityName">city name</h3>
 
         <div class="weather">
@@ -24,18 +24,19 @@
           />
           <div class="degree">10&deg;C</div>
         </div>
+        <div class="details">
+          <div class="icons">
+            <img src="./src/imgs/humidity_blue.png" alt="moist icon" />
+            <img src="./src/imgs/air_blue.png" alt="wind speed icon" />
+          </div>
+          <div class="detailsNumbers">
+            <span class="moist">10%</span>
+            <span class="windSpeed">10 Kph</span>
+          </div>
+        </div>
+
       </div>
 
-      <div class="details">
-        <div class="icons">
-          <img src="./src/imgs/humidity_blue.png" alt="moist icon" />
-          <img src="./src/imgs/air_blue.png" alt="wind speed icon" />
-        </div>
-        <div class="detailsNumbers">
-          <span class="moist">10%</span>
-          <span class="windSpeed">10 Kph</span>
-        </div>
-      </div>
     </div>
 
     <form>
@@ -47,4 +48,7 @@
       />
     </form>
   </body>
+
+  <script src="./src/forecast.js"></script>
+  <script src="./src/app.js"></script>
 </html>
