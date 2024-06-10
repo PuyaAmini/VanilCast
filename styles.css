@@ -12,6 +12,17 @@ body {
        display: none;
 } */
 
+.sun {
+  position: absolute;
+  top: 5%;
+  transform: translate(-50%, -50%) translateY(50%);
+}
+.moon {
+  position: absolute;
+  height: 24px;
+  top: 5.1%;
+  transform: translate(-50%, -50%) translateY(50%);
+}
 
 .update {
   font-size: 0.9rem;
@@ -19,45 +30,64 @@ body {
   top: 2px;
   left: 1px;
 }
-.update img{
-       height: 14px;
-       margin: -5.5% -2px;
-       cursor: pointer;
+.update img {
+  height: 14px;
+       
+  margin: -5.5% -2px;
+  cursor: pointer;
 }
-h3.cityName{
-       margin-top: 20%;
-       margin-bottom: 0px;
-       font-weight: bold;
+h3.cityName {
+  margin-top: 20%;
+  margin-bottom: 0px;
+  font-weight: bold;
 }
-#cityInput{
-       position: sticky;
-       margin: 10px auto;
-       height: 25px;
-       border: solid 1px #3366;
-       border-radius: 3.5px;
-       padding: 6px 4px;
-       font-size: large;
-       text-align: center;
+#cityInput {
+  position: sticky;
+  margin: 10px auto;
+  height: 25px;
+  border: solid 1px #3366;
+  border-radius: 3.5px;
+  padding: 6px 4px;
+  font-size: large;
+  text-align: center;
 }
-.details{
-       margin: auto 20px;
-       font-size: 0.8rem;
+.details {
+  margin: auto 20px;
+  font-size: 0.8rem;
 }
-.icons img{
-       height:14px;
-       margin-inline:10px ;
-       margin-top: 10px;
-       margin-bottom: 3px;
+.icons img {
+  height: 14px;
+  margin-inline: 10px;
+  margin-top: 10px;
+  margin-bottom: 3px;
 }
-.detailsNumbers span.windSpeed{
-       margin-left: 10px;
+.detailsNumbers span.windSpeed {
+  margin-left: 10px;
 }
-.detailsNumbers span.windSpeed{
-       margin-right: -20px;
+.detailsNumbers span.windSpeed {
+  margin-right: -20px;
 }
-form{
-       position: fixed;
-       top:80%;
-       left:50%;
-       transform: translate(-50% , -50%);
+form {
+  position: fixed;
+  top: 80%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* animations */
+@keyframes hi {
+  0% {
+    transform: translate(-50%, -50%) translateY(-250%);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(50%);
+  }
+}
+@keyframes bye {
+  0% {
+    transform: translate(-50%, -50%) translateY(50%);
+  }
+  100% {
+    transform: translate(-50%, -50%) translateY(-250%);
+  }
 }

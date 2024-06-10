@@ -60,6 +60,33 @@ const updateUi = (data, jsonData) => {
   // Apply the text color + background color transition animation
   document.body.style.transition = "background-color 2s , color 2s";
 
+  // toggle the sun and moon icons animations
+  const sun = document.querySelector(".sun");
+  const moon = document.querySelector(".moon");
+
+  if (dayNight === "day") {
+    sun.style.animation = "hi 3s forwards";
+    moon.style.animation = "bye 3s forwards";
+  } else {
+    sun.style.animation = "bye 3s forwards";
+    moon.style.animation = "hi 3s forwards";
+  }
+
+  // moist and wind speed icons mode(for day and night)
+  const moistIcon = document.querySelector(".icons img:first-child");
+  const windSpeedIcon = document.querySelector(".icons img:last-child");
+
+  if (dayNight === "night") {
+    moistIcon.src = "./src/imgs/humidity_light.png";
+    windSpeedIcon.src = "./src/imgs/air_light.png";
+  } else {
+    moistIcon.src = "./src/imgs/humidity_blue.png";
+    windSpeedIcon.src = "./src/imgs/air_blue.png";
+  }
+
+  const humidityIcon = moistIcon.src;
+  const airIcon = windSpeedIcon.src;
+
   information.innerHTML = `
   <div class="information">
         <h3 class="cityName">${name}</h3>
@@ -77,8 +104,8 @@ const updateUi = (data, jsonData) => {
 
       <div class="details">
         <div class="icons">
-          <img src="./src/imgs/humidity_blue.png" alt="moist icon" />
-          <img src="./src/imgs/air_blue.png" alt="wind speed icon" />
+          <img src=${humidityIcon} alt="moist icon" />
+          <img src=${airIcon} alt="wind speed icon" />
         </div>
         <div class="detailsNumbers">
           <span class="moist">${moist}%</span>
