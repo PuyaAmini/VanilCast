@@ -1,7 +1,7 @@
 const update = document.querySelector(".update img");
 const form = document.querySelector("form");
 const information = document.querySelector(".information");
-const sunMoonIcons = document.querySelector('.sunMoonIcons')
+const sunMoonIcons = document.querySelector(".sunMoonIcons");
 //json server
 const fetchJsonData = async () => {
   try {
@@ -15,10 +15,10 @@ const fetchJsonData = async () => {
   }
 };
 // last update time func:
-const updateLastUpdateTime  = (lastUpdateTime) => {
-  const updateSpan = document.querySelector('.update span')
-  updateSpan.innerHTML = `Last updated: ${lastUpdateTime.toLocaleString()}`
-}
+const updateLastUpdateTime = (lastUpdateTime) => {
+  const updateSpan = document.querySelector(".update span");
+  updateSpan.innerHTML = `Last updated: ${lastUpdateTime.toLocaleString()}`;
+};
 
 // 1
 form.addEventListener("submit", (e) => {
@@ -49,7 +49,7 @@ const updateUi = (data, jsonData) => {
     jsonData[summary][dayNight];
 
   information.classList.remove("notDisplay");
-  sunMoonIcons.classList.remove('notDisplay')
+  sunMoonIcons.classList.remove("notDisplay");
 
   // Update the background color based on the dayNight value
   const dayColor = "#4e6aa0";
@@ -93,7 +93,6 @@ const updateUi = (data, jsonData) => {
   const humidityIcon = moistIcon.src;
   const airIcon = windSpeedIcon.src;
 
-
   information.innerHTML = `
   <div class="information">
         <h3 class="cityName">${name}</h3>
@@ -121,7 +120,18 @@ const updateUi = (data, jsonData) => {
       </div>
     </div>`;
 
-    // update last updated time:
-    let lastUpdateTime = new Date();
-    updateLastUpdateTime(lastUpdateTime);
+  // update last updated time:
+  let lastUpdateTime = new Date();
+  updateLastUpdateTime(lastUpdateTime);
 };
+
+// update button
+update.addEventListener("click", () => {
+  const cityNameElement = document.querySelector(".cityName");
+  if (cityNameElement) {
+    const cityName = cityNameElement.textContent;
+    dataGrabber(cityName).then(console.log("updated"));
+  } else {
+    console.error("City name element not found");
+  }
+});
