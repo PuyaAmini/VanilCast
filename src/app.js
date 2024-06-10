@@ -43,6 +43,8 @@ const updateUi = (data, jsonData) => {
   const { image: imgLink, description: descriptions } =
     jsonData[summary][dayNight];
 
+  information.classList.remove('notDisplay')
+
   information.innerHTML = `
   <div class="information">
         <h3 class="cityName">${name}</h3>
