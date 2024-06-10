@@ -5,7 +5,7 @@ const information = document.querySelector(".information");
 //json server
 const fetchJsonData = async () => {
   try {
-    const response = await fetch("/src/descriptions.json");
+    const response = await fetch("./src/descriptions.json");
     if (!response.ok) {
       throw new Error(`error: ${response.status}`);
     }
