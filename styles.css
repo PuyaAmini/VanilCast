@@ -8,9 +8,9 @@ body {
   background-color: #4e6aa0;
   color: #333;
 }
-/* .notDisplay{
+.notDisplay{
        display: none;
-} */
+}
 
 .sun {
   position: absolute;
@@ -33,7 +33,7 @@ body {
 .update img {
   height: 14px;
        
-  margin: -5.5% -2px;
+  margin: -1.5% -2px;
   cursor: pointer;
 }
 h3.cityName {
