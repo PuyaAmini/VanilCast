@@ -43,7 +43,22 @@ const updateUi = (data, jsonData) => {
   const { image: imgLink, description: descriptions } =
     jsonData[summary][dayNight];
 
-  information.classList.remove('notDisplay')
+  information.classList.remove("notDisplay");
+
+  // Update the background color based on the dayNight value
+  const dayColor = "#4e6aa0";
+  const nightColor = "#282c34";
+  const backgroundColor = dayNight === "day" ? dayColor : nightColor;
+  document.body.style.backgroundColor = backgroundColor;
+
+  // Update the texts color based on the dayNight value
+  const dayText = "#282c34";
+  const nightText = "#4e6aa0";
+  const textColor = dayNight === "day" ? dayText : nightText;
+  document.body.style.color = textColor;
+
+  // Apply the text color + background color transition animation
+  document.body.style.transition = "background-color 2s , color 2s";
 
   information.innerHTML = `
   <div class="information">

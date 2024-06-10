@@ -12,14 +12,7 @@ body {
        display: none;
 } */
 
-.background{
-       z-index: -1;
-       position: absolute;
-       top: 0%;
-       left: 0%;
-       
-       width: 100%;
-}
+
 .update {
   font-size: 0.9rem;
   position: absolute;
