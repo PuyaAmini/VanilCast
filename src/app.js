@@ -36,6 +36,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
   loading.classList.remove("notDisplay");
   const name = form.cityInput.value.trim();
+  saveCityName(name)
   form.reset();
 
   dataGrabber(name).then((data) => console.log(data));
@@ -45,17 +46,24 @@ form.addEventListener("submit", (e) => {
 const dataGrabber = async (name) => {
   const jsonData = await fetchJsonData();
   cityInput.disabled = true;
-  const weatherInformation = await getWeather(name)
-    .then((data) => updateUi(data, jsonData))
-    .catch((err) => {
-      console.log(err);
-      const errorMessage = `
-      #6: error getting weather info for ${name}
-      `;
-      showErrorMessage(errorMessage);
+  try {
+    const data = await getWeather(name);
+    if (data) {
+      updateUi(data, jsonData);
+    } else {
+      console.log("#7: err getting weather data");
       cityInput.disabled = false;
       loading.classList.add("notDisplay");
-    });
+    }
+  } catch (err) {
+    console.log(err);
+    const errorMessage = `
+    #6: error getting weather info for ${name}
+    `;
+    showErrorMessage(errorMessage);
+    cityInput.disabled = false;
+    loading.classList.add("notDisplay");
+  }
 };
 // 3
 const updateUi = (data, jsonData) => {
@@ -159,10 +167,14 @@ update.addEventListener("click", async () => {
     try {
       const jsonData = await fetchJsonData();
       const data = await getWeather(cityName);
-      updateUi(data, jsonData);
-      console.log("updated");
+      if(data){
+        updateUi(data, jsonData);
+        console.log("updated");
+      }else{
+        console.log('#8 Error getting weather data')
+      }
     } catch (err) {
-      console.log("err fetching weather data: ", err);
+      console.log("#9 err fetching weather data: ", err);
     }
   } else {
     console.error("#3: City name element not found");
@@ -185,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .then(async (data) => {
         if (data) {
           const jsonData = await fetchJsonData();
-          updateUi(data, jsonData);
+          await updateUi(data, jsonData);
         } else {
           console.log("#1: error getting weather data local storage  ");
         }
