@@ -182,15 +182,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const exCityName = localCityName();
   if (exCityName) {
     dataGrabber(exCityName)
-      .then(async (data) =>{
-        if(data){
-          const jsonData = await fetchJsonData()
-          updateUi(data , jsonData)
-        }else{
-          console.log('#1: error getting weather data local storage  ')
+      .then(async (data) => {
+        if (data) {
+          const jsonData = await fetchJsonData();
+          updateUi(data, jsonData);
+        } else {
+          console.log("#1: error getting weather data local storage  ");
         }
-      }).catch(err =>{
-        console.log('#2: error getting info for saved city ', err)
       })
+      .catch((err) => {
+        console.log("#2: error getting info for saved city ", err);
+      });
   }
 });
