@@ -2,16 +2,21 @@ const update = document.querySelector(".update img");
 const form = document.querySelector("form");
 const information = document.querySelector(".information");
 const sunMoonIcons = document.querySelector(".sunMoonIcons");
+const loading = document.querySelector(".loading");
+const cityInput = document.querySelector("#cityInput");
+
 //json server
 const fetchJsonData = async () => {
   try {
     const response = await fetch("./src/descriptions.json");
     if (!response.ok) {
-      throw new Error(`error: ${response.status}`);
+      throw new Error(`#5 error: ${response.status}`);
     }
     return await response.json();
   } catch (err) {
-    console.error("Error fetching JSON: ", err);
+    console.error("#4: Error fetching JSON: ", err);
+    cityInput.disabled = false;
+    loading.classList.add("notDisplay");
   }
 };
 // last update time func:
@@ -19,10 +24,17 @@ const updateLastUpdateTime = (lastUpdateTime) => {
   const updateSpan = document.querySelector(".update span");
   updateSpan.innerHTML = `Last updated: ${lastUpdateTime.toLocaleString()}`;
 };
+// Error message function
+const showErrorMessage = (message) => {
+  console.log(message);
+  // I can create an error message element
+  // and append it to the DOM here
+};
 
 // 1
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+  loading.classList.remove("notDisplay");
   const name = form.cityInput.value.trim();
   form.reset();
 
@@ -32,9 +44,18 @@ form.addEventListener("submit", (e) => {
 // 2
 const dataGrabber = async (name) => {
   const jsonData = await fetchJsonData();
+  cityInput.disabled = true;
   const weatherInformation = await getWeather(name)
     .then((data) => updateUi(data, jsonData))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err);
+      const errorMessage = `
+      #6: error getting weather info for ${name}
+      `;
+      showErrorMessage(errorMessage);
+      cityInput.disabled = false;
+      loading.classList.add("notDisplay");
+    });
 };
 // 3
 const updateUi = (data, jsonData) => {
@@ -50,6 +71,11 @@ const updateUi = (data, jsonData) => {
 
   information.classList.remove("notDisplay");
   sunMoonIcons.classList.remove("notDisplay");
+
+  loading.classList.add("notDisplay");
+
+  // enable input again:
+  cityInput.disabled = false;
 
   // Update the background color based on the dayNight value
   const dayColor = "#4e6aa0";
@@ -126,12 +152,45 @@ const updateUi = (data, jsonData) => {
 };
 
 // update button
-update.addEventListener("click", () => {
+update.addEventListener("click", async () => {
   const cityNameElement = document.querySelector(".cityName");
   if (cityNameElement) {
     const cityName = cityNameElement.textContent;
-    dataGrabber(cityName).then(console.log("updated"));
+    try {
+      const jsonData = await fetchJsonData();
+      const data = await getWeather(cityName);
+      updateUi(data, jsonData);
+      console.log("updated");
+    } catch (err) {
+      console.log("err fetching weather data: ", err);
+    }
   } else {
-    console.error("City name element not found");
+    console.error("#3: City name element not found");
+  }
+});
+
+//local storage func
+const saveCityName = (cityName) => {
+  localStorage.setItem("lastCity", cityName);
+};
+
+const localCityName = () => {
+  return localStorage.getItem("lastCity");
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  const exCityName = localCityName();
+  if (exCityName) {
+    dataGrabber(exCityName)
+      .then(async (data) =>{
+        if(data){
+          const jsonData = await fetchJsonData()
+          updateUi(data , jsonData)
+        }else{
+          console.log('#1: error getting weather data local storage  ')
+        }
+      }).catch(err =>{
+        console.log('#2: error getting info for saved city ', err)
+      })
   }
 });
