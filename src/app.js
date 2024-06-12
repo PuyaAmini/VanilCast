@@ -8,7 +8,7 @@ const cityInput = document.querySelector("#cityInput");
 //json server
 const fetchJsonData = async () => {
   try {
-    const response = await fetch("./src/descriptions.json");
+    const response = await fetch('./src/descriptions.json');
     if (!response.ok) {
       throw new Error(`#5 error: ${response.status}`);
     }
